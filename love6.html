@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng 20/10</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            overflow: hidden;
+            /* Tắt hiệu ứng highlight màu xanh khi nhấn giữ trên mobile */
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+        .font-letter {
+            font-family: 'Patrick Hand', cursive;
+        }
+        /* --- CSS cho màn hình chờ --- */
+        #start-button {
+            width: 100px;
+            height: 100px;
+            background-color: #ff4757;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            animation: beat 1.5s infinite, glow 2s infinite;
+            box-shadow: 0 0 20px #ff4757, 0 0 40px #ff4757;
+            border: 2px solid white;
+            font-size: 3.5rem; /* Tăng kích thước trái tim emoji */
+        }
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px #ff4757, 0 0 40px #ff4757; }
+            50% { box-shadow: 0 0 30px #ff6b81, 0 0 60px #ff6b81; }
+        }
+
+        /* --- CSS hiệu ứng --- */
+        .firework { position: absolute; }
+        .particle {
+            position: absolute; width: 5px; height: 5px;
+            border-radius: 50%; opacity: 0;
+            animation: explode 4s forwards;
+        }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2) translate(var(--x), var(--y)); opacity: 0; }
+        }
+        .heart {
+            position: absolute; bottom: -50px; font-size: 2rem;
+            opacity: 0; animation: float-up 8s infinite linear;
+        }
+        @keyframes float-up {
+            0% { transform: translateY(0); opacity: 0.7; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        #boy-with-bouquet-wrapper {
+            position: relative; cursor: pointer;
+            filter: drop-shadow(0 0 15px rgba(255, 182, 193, 0.7));
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .letter-content::-webkit-scrollbar { width: 8px; }
+        .letter-content::-webkit-scrollbar-track { background: #fde4e4; border-radius: 10px; }
+        .letter-content::-webkit-scrollbar-thumb { background: #f87171; border-radius: 10px; }
+        .letter-content::-webkit-scrollbar-thumb:hover { background: #ef4444; }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-gray-900 to-indigo-900 text-white flex items-center justify-center min-h-screen relative overflow-hidden p-4">
+    <audio id="background-music" loop preload="auto">
+        <source src="https://files.catbox.moe/z8cbd3.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="start-screen" class="z-50 flex flex-col items-center text-center transition-opacity duration-500">
+        <h1 class="text-3xl sm:text-4xl font-dancing text-pink-200 mb-4">Một món quà đặc biệt...</h1>
+        <div id="start-button">❤️</div>
+        <p class="mt-6 text-pink-200 animate-pulse">Chạm vào trái tim để mở nhé!</p>
+    </div>
+
+    <div id="hearts-container" class="absolute inset-0 z-0"></div>
+
+    <main class="z-10 transition-opacity duration-500 flex-col items-center hidden" id="main-content">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold font-dancing text-pink-300 mb-4 text-center">💕 FOR YOU 💕 </h1>
+        <p class="text-md sm:text-lg md:text-xl text-pink-100 mb-8 text-center">Một món quà nhỏ dành tặng người con gái tuyệt vời nhất!</p>
+        <div id="boy-with-bouquet-wrapper" class="w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] overflow-hidden rounded-full bg-pink-500/10 flex items-center justify-center">
+            <img id="boy-image" src="https://i.postimg.cc/cHYY1whm/t-i-xu-ng.png" alt="Chàng trai cầm hoa" class="w-full h-full object-cover">
+        </div>
+        <p class="mt-4 text-pink-200 animate-pulse">Nhấn vào tui nhé!</p>
+    </main>
+
+    <div id="fireworks-container" class="absolute inset-0 pointer-events-none z-20"></div>
+    <div id="letter-modal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-30 backdrop-blur-sm">
+        <div class="bg-white text-gray-800 rounded-2xl shadow-2xl w-full max-w-2xl transform transition-all duration-500 scale-95 opacity-0" id="letter-card">
+            <div class="p-6 sm:p-8 relative">
+                <button id="close-letter" class="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-4xl leading-none">&times;</button>
+                <h2 class="text-3xl sm:text-4xl font-dancing text-center text-pink-500 mb-6">Gửi những người phụ nữ tuyệt vời!</h2>
+                <div class="letter-content max-h-[60vh] overflow-y-auto pr-4 font-letter">
+                    <p class="text-base sm:text-lg leading-relaxed mb-4">Nhân ngày 20/10, xin được gửi đến bạn những lời chúc chân thành và tốt đẹp nhất.</p>
+                    <p class="text-base sm:text-lg leading-relaxed mb-6">Chúc bạn luôn xinh đẹp rạng ngời như những đóa hoa, mạnh mẽ và kiên cường trước mọi sóng gió, nhưng cũng thật dịu dàng và an yên trong tâm hồn. Chúc cho mỗi ngày của bạn đều là một ngày vui, mỗi khoảnh khắc đều tràn ngập tiếng cười và hạnh phúc. Hãy luôn yêu thương bản thân, tự tin theo đuổi đam mê và tỏa sáng theo cách riêng của mình nhé!</p>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        <img src="https://i.postimg.cc/44Kq5M0Y/images.jpg" alt="Hình ảnh tình yêu" class="rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300"><img src="https://i.postimg.cc/28gzGhGM/images-1.jpg" alt="Hình ảnh hạnh phúc" class="rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300"><img src="https://i.postimg.cc/GhTR49Rg/chibi-cute-12.jpg" alt="Hình ảnh bên nhau" class="rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300"><img src="https://i.postimg.cc/mg309H5S/hinh-anh-chibi-nu-cute.jpg" alt="Hình ảnh nụ cười" class="rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300"><img src="https://i.postimg.cc/m27bdhnT/anime-de-thuong-chibi-004.webp" alt="Hình ảnh ánh nắng" class="rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300"><img src="https://i.postimg.cc/Wpkj3hTk/chibi-cute-26.jpg" alt="Hình ảnh mãi mãi" class="rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <p class="text-lg sm:text-xl leading-relaxed mt-8 text-right font-dancing text-pink-600">You are wonderful!<br>Thân thương!<br>Từ một người luôn trân trọng và yêu quý bạn 💕💕💕</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Lấy các element cần dùng
+        const startScreen = document.getElementById('start-screen');
+        const startButton = document.getElementById('start-button');
+        const mainContent = document.getElementById('main-content');
+        const boyWithBouquetWrapper = document.getElementById('boy-with-bouquet-wrapper');
+        const fireworksContainer = document.getElementById('fireworks-container');
+        const letterModal = document.getElementById('letter-modal');
+        const letterCard = document.getElementById('letter-card');
+        const closeLetterBtn = document.getElementById('close-letter');
+        const heartsContainer = document.getElementById('hearts-container');
+        const backgroundMusic = document.getElementById('background-music');
+
+        // THAY ĐỔI 3: Xử lý sự kiện nhấn nút bắt đầu
+        startButton.addEventListener('click', () => {
+            // Phát nhạc (cách này được trình duyệt mobile chấp nhận)
+            backgroundMusic.play().catch(e => console.error("Lỗi phát nhạc:", e));
+
+            // Ẩn màn hình chờ và hiện nội dung chính
+            startScreen.style.opacity = '0';
+            setTimeout(() => {
+                startScreen.style.display = 'none';
+                mainContent.classList.remove('hidden');
+                mainContent.classList.add('flex');
+            }, 500);
+            
+            // Bắt đầu hiệu ứng trái tim bay
+            createHearts();
+        });
+
+        // Xử lý nhấn vào ảnh chàng trai
+        boyWithBouquetWrapper.addEventListener('click', () => {
+            createFireworks();
+            mainContent.style.opacity = '0';
+            setTimeout(() => {
+                mainContent.classList.add('hidden');
+                letterModal.classList.remove('hidden');
+                setTimeout(() => {
+                    letterCard.style.transform = 'scale(1)';
+                    letterCard.style.opacity = '1';
+                }, 50);
+            }, 500);
+            setTimeout(() => { fireworksContainer.innerHTML = ''; }, 4000);
+        });
+        
+        // Xử lý đóng bức thư
+        function closeLetter() {
+            letterCard.style.transform = 'scale(0.95)';
+            letterCard.style.opacity = '0';
+            setTimeout(() => {
+                letterModal.classList.add('hidden');
+                mainContent.classList.remove('hidden');
+                setTimeout(() => { mainContent.style.opacity = '1'; }, 50);
+            }, 500);
+            // Bạn có thể chọn dừng nhạc khi đóng thư nếu muốn
+            // backgroundMusic.pause(); 
+        }
+
+        closeLetterBtn.addEventListener('click', closeLetter);
+        letterModal.addEventListener('click', (e) => {
+            if (e.target === letterModal) {
+                closeLetter();
+            }
+        });
+
+        // Hàm tạo pháo hoa (giữ nguyên)
+        function createFireworks() { /* ... code ... */ }
+        
+        // Hàm tạo trái tim (giữ nguyên)
+        function createHearts() { /* ... code ... */ }
+        
+        // Sao chép lại toàn bộ code của 2 hàm createFireworks và createHearts từ file cũ của bạn vào đây
+        function createFireworks() { const colors = ['#F87171', '#FBBF24', '#A78BFA', '#EC4899', '#34D399', '#60A5FA']; for (let i = 0; i < 50; i++) { const particle = document.createElement('div'); particle.classList.add('particle'); const angle = Math.random() * Math.PI * 2; const radius = Math.random() * (Math.min(window.innerWidth, window.innerHeight) / 3) + 30; particle.style.setProperty('--x', `${Math.cos(angle) * radius}px`); particle.style.setProperty('--y', `${Math.sin(angle) * radius}px`); particle.style.background = colors[Math.floor(Math.random() * colors.length)]; const firework = document.createElement('div'); firework.classList.add('firework'); firework.style.left = `${Math.random() * 80 + 10}%`; firework.style.top = `${Math.random() * 50 + 10}%`; firework.appendChild(particle); fireworksContainer.appendChild(firework); } }
+        function createHearts() { const heartEmojis = ['❤️', '💖', '💗', '💕', '💓','💝']; setInterval(() => { const heart = document.createElement('div'); heart.classList.add('heart'); heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)]; heart.style.left = `${Math.random() * 100}%`; heart.style.animationDuration = `${Math.random() * 5 + 7}s`; heart.style.fontSize = `${Math.random() * 1 + 1}rem`; heartsContainer.appendChild(heart); setTimeout(() => { heart.remove(); }, 12000); }, 500); }
+    </script>
+</body>
+</html>
