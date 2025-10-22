@@ -1,0 +1,1662 @@
+<html lang="vi"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="THE BEST MART - Siêu thị trực tuyến FMCG uy tín. Mua sắm hàng ngàn sản phẩm thực phẩm, chăm sóc cá nhân, gia đình. Giao hàng nhanh, giá tốt.">
+    <meta name="keywords" content="siêu thị trực tuyến, fmcg, thực phẩm, hàng tiêu dùng, chăm sóc cá nhân, THE BEST MART">
+    <meta property="og:title" content="THE BEST MART - Siêu thị trực tuyến của bạn">
+    <meta property="og:description" content="Mua sắm hàng ngàn sản phẩm FMCG giá tốt, giao hàng nhanh.">
+    <meta property="og:image" content="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/49c17bb634404cdfb996ecfc49b6bdef~tplv-a9rns2rl98-image.image?rcl=20251013222126578C684A922BBDE0B488&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1760970087&amp;x-signature=HeEO%2FlhgS413Tqm2ZK5H3WWOlmk%3D"> <meta property="og:url" content="https://thebestmart.com"> <meta property="og:type" content="website">
+    <title>THE BEST MART - Siêu thị trực tuyến của bạn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "THE BEST MART",
+      "url": "https://thebestmart.com", // Thay bằng tên miền thật
+      "logo": "https://thebestmart.com/logo.png", // Thay bằng link logo thật
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "0969752790",
+        "contactType": "customer service",
+        "areaServed": "VN",
+        "availableLanguage": "Vietnamese"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "31 Phan Đình Giót",
+        "addressLocality": "Thanh Xuân",
+        "addressRegion": "Hà Nội",
+        "postalCode": "100000",
+        "addressCountry": "VN"
+      }
+    }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            scroll-behavior: smooth;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        .filter-section {
+            border-bottom: 1px solid #e2e8f0; /* slate-200 */
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .filter-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .product-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .product-card:hover .add-to-cart-btn-grid {
+            background-color: #0284c7; /* sky-700 */
+        }
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        .product-image-container {
+            overflow: hidden;
+        }
+        .product-image-container img {
+            transition: transform 0.5s ease;
+        }
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-backdrop.active {
+            opacity: 1;
+        }
+        .modal-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .modal-content.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Custom scrollbar */
+        #filters-sidebar, .modal-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: #9ca3af #f1f5f9;
+        }
+        #filters-sidebar::-webkit-scrollbar, .modal-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        #filters-sidebar::-webkit-scrollbar-track, .modal-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        #filters-sidebar::-webkit-scrollbar-thumb, .modal-scroll::-webkit-scrollbar-thumb {
+            background: #9ca3af;
+            border-radius: 4px;
+        }
+        #filters-sidebar::-webkit-scrollbar-thumb:hover, .modal-scroll::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        /* Form validation style */
+        .form-input-error {
+            border-color: #ef4444; /* red-500 */
+        }
+        .stars-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            color: #facc15; /* amber-400 */
+        }
+        .stars-outer {
+            position: relative;
+            display: inline-block;
+            color: #d1d5db; /* gray-300 */
+        }
+        /* Button animations */
+        .btn-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            }
+        }
+        /* Add to cart animation */
+        @keyframes addToCart {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .add-to-cart-animation {
+            animation: addToCart 0.5s ease;
+        }
+        /* Sale badge */
+        .sale-badge {
+            transform: translate(0, 0);
+            transition: transform 0.3s ease;
+        }
+        .product-card:hover .sale-badge {
+            transform: translate(0, -5px);
+        }
+        /* Checkbox animation */
+        .filter-input {
+            transition: all 0.2s ease;
+        }
+        .filter-input:checked {
+            accent-color: #3b82f6; /* sky-500 */
+        }
+        /* Navbar shadow on scroll */
+        .header-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        /* Category active state */
+        .category-nav.active {
+            position: relative;
+        }
+        .category-nav.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #3b82f6;
+            border-radius: 1px;
+        }
+        /* Banner styles */
+        .banner-container {
+            overflow: hidden;
+            position: relative;
+        }
+        .banner-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .banner-container:hover .banner-image {
+            transform: scale(1.02);
+        }
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+            display: flex;
+            align-items: center;
+        }
+        .banner-content {
+            padding: 2rem;
+            color: white;
+            max-width: 600px;
+        }
+        /* Footer styles */
+        footer {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        .footer-link {
+            color: #94a3b8;
+            transition: color 0.2s ease;
+        }
+        .footer-link:hover {
+            color: white;
+        }
+        .social-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #1e293b;
+            color: #94a3b8;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background-color: #3b82f6;
+            color: white;
+            transform: translateY(-3px);
+        }
+        .payment-method {
+            max-height: 2rem;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+        .payment-method:hover {
+            filter: grayscale(0);
+        }
+        /* Animation for form errors */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        
+        /* Social Media Bubble Styles */
+        .social-bubble-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1rem;
+        }
+        
+        .social-bubble-trigger {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        
+        .social-bubble-trigger:hover {
+            transform: scale(1.1);
+            background-color: #2563eb;
+        }
+        
+        .social-bubbles {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .social-bubbles.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .social-bubble {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-bubble.facebook {
+            background-color: #1877f2;
+        }
+        
+        .social-bubble.tiktok {
+            background-color: #000000;
+        }
+        
+        .social-bubble:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-white sticky top-0 z-40 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-sky-600 flex items-center">
+                <i class="fas fa-shopping-basket mr-2"></i>
+                THE BEST MART
+            </h1>
+            <div class="flex items-center space-x-4">
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-sky-600 font-medium category-nav active transition-colors duration-300" data-category="all">Tất cả</a>
+                    <a href="#" class="text-gray-600 hover:text-sky-600 font-medium category-nav transition-colors duration-300" data-category="food">Thực phẩm</a>
+                    <a href="#" class="text-gray-600 hover:text-sky-600 font-medium category-nav transition-colors duration-300" data-category="personal-care">Chăm sóc cá nhân</a>
+                    <a href="#" class="text-gray-600 hover:text-sky-600 font-medium category-nav transition-colors duration-300" data-category="home-care">Chăm sóc gia đình</a>
+                </nav>
+                
+                <button id="tracking-button" class="relative text-gray-600 hover:text-sky-600 transition-colors duration-300" aria-label="Theo dõi đơn hàng">
+                    <i class="fas fa-truck fa-lg"></i>
+                </button>
+                
+                <button id="cart-button" class="relative text-gray-600 hover:text-sky-600 transition-colors duration-300" aria-label="Giỏ hàng">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-sky-600 transition-colors duration-300" aria-label="Mở menu">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t transform transition-transform duration-300 ease-in-out">
+            <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-sky-50 category-nav active" data-category="all">Tất cả</a>
+            <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-sky-50 category-nav" data-category="food">Thực phẩm</a>
+            <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-sky-50 category-nav" data-category="personal-care">Chăm sóc cá nhân</a>
+            <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-sky-50 category-nav" data-category="home-care">Chăm sóc gia đình</a>
+        </div>
+    </header>
+
+    <section class="banner-container h-64 md:h-80 relative">
+        <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/49c17bb634404cdfb996ecfc49b6bdef~tplv-a9rns2rl98-image.image?rcl=20251013222126578C684A922BBDE0B488&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1760970087&amp;x-signature=HeEO%2FlhgS413Tqm2ZK5H3WWOlmk%3D" alt="Banner quảng cáo tháng 10: Giảm giá lên đến 50% cho tất cả sản phẩm" class="banner-image w-full h-full">
+        <div class="banner-overlay">
+            <div class="banner-content">
+                <h2 class="text-2xl md:text-4xl font-bold mb-2">Giảm giá đặc biệt tháng 10</h2>
+                <p class="mb-4">Mua sắm ngay để nhận ưu đãi lên đến 50% cho tất cả sản phẩm, kèm thêm phiếu giảm giá 100.000đ cho đơn hàng trên 500.000đ</p>
+                <button class="bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 px-6 rounded-lg transition duration-300">Xem tất cả ưu đãi</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gradient-to-r from-sky-600 to-sky-400 text-white py-8 md:py-12 hero-section">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Mua sắm dễ dàng, nhận hàng nhanh chóng</h2>
+                <p class="text-lg md:text-xl opacity-90 mb-6">Tất cả sản phẩm chất lượng với giá cả hợp lý, giao đến tận nhà trong 24h</p>
+                <div class="relative max-w-xl mx-auto">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm bạn cần..." class="w-full py-3 px-5 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-white/50 text-gray-800">
+                    <button class="absolute right-2 top-1/2 -translate-y-1/2 bg-sky-700 hover:bg-sky-800 text-white p-2 rounded-full transition-colors duration-300" aria-label="Tìm kiếm">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <button id="filter-toggle" class="lg:hidden w-full bg-white p-3 rounded-lg shadow-md mb-4 flex justify-between items-center hover:shadow-lg transition-shadow duration-300">
+                <span><i class="fas fa-filter mr-2"></i> Bộ lọc chi tiết</span>
+                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+            </button>
+            <aside id="filters-sidebar" class="w-full lg:w-1/4 bg-white p-6 rounded-lg shadow-md self-start hidden lg:block lg:sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto transition-all duration-300">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold">Bộ lọc chi tiết</h2>
+                    <button id="reset-filters-btn" class="text-sm text-sky-600 hover:text-sky-700 hover:underline transition-colors duration-300">Xóa lọc</button>
+                </div>
+                <div id="filters-container">
+                    </div>
+            </aside>
+
+            <section class="w-full lg:w-3/4">
+                 <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+                    <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-300">
+                </div>
+                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                    </div>
+            </section>
+        </div>
+    </main>
+    
+    <div id="product-detail-modal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-backdrop fixed inset-0"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl w-11/12 md:w-3/4 lg:w-2/3 max-w-4xl flex flex-col md:flex-row max-h-[90vh]">
+            <div id="modal-content" class="flex-grow flex flex-col md:flex-row">
+                 </div>
+        </div>
+    </div>
+
+
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-backdrop fixed inset-0"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl w-11/12 md:w-2/3 lg:w-1/2 max-w-2xl flex flex-col transform transition-all duration-300">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h3 class="text-2xl font-bold">Giỏ hàng</h3>
+                <button class="close-modal text-gray-500 hover:text-gray-800 text-2xl transition-colors duration-300" data-modal-id="cart-modal" aria-label="Đóng giỏ hàng">×</button>
+            </div>
+            <div id="cart-items" class="p-6 max-h-[60vh] overflow-y-auto modal-scroll">
+                </div>
+            <div class="p-6 border-t mt-auto">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-lg font-medium">Tổng cộng:</span>
+                    <span id="cart-total" class="text-xl font-bold text-sky-600">0đ</span>
+                </div>
+                <button id="checkout-button" class="w-full bg-sky-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-sky-700 transition duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed">
+                    Đi đến thanh toán
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkout-modal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-backdrop fixed inset-0"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl w-11/12 md:w-2/3 lg:w-1/2 max-w-2xl flex flex-col transform transition-all duration-300">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h3 class="text-2xl font-bold">Thông tin &amp; Thanh toán</h3>
+                 <button id="back-to-cart-button" class="text-sm text-sky-600 hover:text-sky-700 hover:underline transition-colors duration-300"><i class="fas fa-arrow-left mr-1"></i> Quay lại giỏ hàng</button>
+            </div>
+            <div class="p-6 overflow-y-auto max-h-[80vh] modal-scroll">
+                <form id="checkout-form">
+                    <h4 class="text-lg font-semibold mb-3 border-b pb-2">Thông tin giao hàng</h4>
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <label for="customer-name" class="block mb-1 font-medium">Họ và tên *</label>
+                            <input type="text" id="customer-name" name="customer-name" required="" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all duration-300">
+                        </div>
+                        <div>
+                            <label for="customer-phone" class="block mb-1 font-medium">Số điện thoại *</label>
+                            <input type="tel" id="customer-phone" name="customer-phone" required="" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all duration-300">
+                        </div>
+                        <div>
+                            <label for="customer-address" class="block mb-1 font-medium">Địa chỉ nhận hàng *</label>
+                            <textarea id="customer-address" name="customer-address" required="" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all duration-300"></textarea>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-semibold mb-3 border-b pb-2">Chọn hình thức thanh toán</h4>
+                    <div id="payment-options-container" class="space-y-3">
+                         <label class="block p-4 border rounded-lg hover:bg-sky-50 cursor-pointer transition-all duration-300 has-[:checked]:bg-sky-50 has-[:checked]:border-sky-500">
+                            <input type="radio" name="payment" value="COD" class="mr-3" checked="">Thanh toán khi nhận hàng (COD)
+                        </label>
+                         <label class="block p-4 border rounded-lg hover:bg-sky-50 cursor-pointer transition-all duration-300 has-[:checked]:bg-sky-50 has-[:checked]:border-sky-500">
+                            <input type="radio" name="payment" value="Card" class="mr-3">Thanh toán qua Thẻ ngân hàng
+                        </label>
+                        <label class="block p-4 border rounded-lg hover:bg-sky-50 cursor-pointer transition-all duration-300 has-[:checked]:bg-sky-50 has-[:checked]:border-sky-500">
+                            <input type="radio" name="payment" value="E-wallet" class="mr-3">Ví điện tử (MoMo, ZaloPay,...)
+                        </label>
+                         <label class="block p-4 border rounded-lg hover:bg-sky-50 cursor-pointer transition-all duration-300 has-[:checked]:bg-sky-50 has-[:checked]:border-sky-500">
+                            <input type="radio" name="payment" value="Bank Transfer" class="mr-3">Chuyển khoản ngân hàng
+                        </label>
+                    </div>
+                    <div class="mt-6">
+                        <button type="submit" class="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-700 transition duration-300 shadow-md hover:shadow-lg">
+                            Hoàn tất đơn hàng
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+     <div id="confirmation-modal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-backdrop fixed inset-0"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl w-11/12 max-w-md p-8 text-center transform transition-all duration-300">
+            <div class="text-6xl mb-4 text-green-500"><i class="fas fa-check-circle"></i></div>
+            <h3 class="text-2xl font-bold mb-2">Đặt hàng thành công!</h3>
+            <p id="confirmation-message" class="text-gray-600 mb-6 text-left">
+                </p>
+            <button class="close-modal w-full bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-700 transition duration-300 shadow-md hover:shadow-lg" data-modal-id="confirmation-modal" aria-label="Đóng thông báo">
+                Tiếp tục mua sắm
+            </button>
+        </div>
+    </div>
+    
+    <div id="promo-popup-modal" class="fixed inset-0 z-50 hidden items-center justify-center">
+        <div class="modal-backdrop fixed inset-0"></div>
+        <div class="relative bg-transparent rounded-lg w-11/12 max-w-md transform transition-all duration-500 scale-95 opacity-0">
+            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/21fb937c29a9405bacf5d46f7f33bac6~tplv-a9rns2rl98-image.image?rcl=202510142254597836F2FF1663D451CA01&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1761058500&amp;x-signature=OXUIZBBNjsqKfEng9INSErG3qa0%3D" alt="Khuyến mãi đặc biệt: Mua 1 tặng 1 cho các sản phẩm chăm sóc cá nhân" class="w-full h-auto rounded-lg shadow-2xl">
+            <button class="close-promo-popup absolute -top-2 -right-2 text-white bg-black bg-opacity-50 rounded-full h-8 w-8 flex items-center justify-center text-2xl hover:bg-opacity-75 transition-all" aria-label="Đóng khuyến mãi">×</button>
+        </div>
+    </div>
+    
+    <div id="tracking-modal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-backdrop fixed inset-0"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl w-11/12 max-w-lg flex flex-col transform transition-all duration-300">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h3 class="text-2xl font-bold">Kiểm tra đơn hàng</h3>
+                <button class="close-modal text-gray-500 hover:text-gray-800 text-2xl transition-colors duration-300" data-modal-id="tracking-modal" aria-label="Đóng">×</button>
+            </div>
+            <div class="p-6 overflow-y-auto max-h-[80vh] modal-scroll">
+                <form id="tracking-form">
+                    <label for="order-id" class="block mb-2 font-medium">Nhập mã đơn hàng của bạn:</label>
+                    <input type="text" id="order-id" placeholder="VD: TBM12345" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-300">
+                    <button type="submit" class="w-full bg-sky-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-sky-700 transition duration-300 mt-4">
+                        <i class="fas fa-search mr-2"></i>Tra cứu
+                    </button>
+                </form>
+                <div id="tracking-results" class="mt-4">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="social-bubble-container">
+        <div class="social-bubbles">
+            <a href="https://www.facebook.com/share/1D2DQ6TXRs/" target="_blank" class="social-bubble facebook" aria-label="Facebook page của THE BEST MART">
+                <i class="fab fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.tiktok.com/@thebest_mart?_t=ZS-90ZRFV1cG6D&_r=1" target="_blank" class="social-bubble tiktok" aria-label="TikTok page của THE BEST MART">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
+        <div class="social-bubble-trigger" id="social-bubble-trigger">
+            <i class="fas fa-comment"></i>
+        </div>
+    </div>
+
+    <footer class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="footer-column">
+                    <h3 class="flex items-center">
+                        <i class="fas fa-shopping-basket mr-2"></i>
+                        THE BEST MART
+                    </h3>
+                    <p class="text-gray-400 mb-4">Siêu thị trực tuyến uy tín với hàng nghìn sản phẩm chất lượng, giá cả hợp lý và dịch vụ giao hàng nhanh chóng.</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Liên hệ</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-gray-400"></i>
+                            <span class="footer-link">31 Phan Đình Giót, Thanh Xuân, TP Hà Nội.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-gray-400"></i>
+                            <a href="tel:02812345678" class="footer-link">0969752790</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-gray-400"></i>
+                            <a href="mailto:info@thebestmart.com" class="footer-link">Nhom7@thebestmart.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock mr-3 text-gray-400"></i>
+                            <span class="footer-link">7:00 - 22:00 tất cả các ngày</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Danh mục</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link block hover:pl-2 transition-all duration-200">Thực phẩm</a></li>
+                        <li><a href="#" class="footer-link block hover:pl-2 transition-all duration-200">Chăm sóc cá nhân</a></li>
+                        <li><a href="#" class="footer-link block hover:pl-2 transition-all duration-200">Chăm sóc gia đình</a></li>
+                        <li><a href="#" class="footer-link block hover:pl-2 transition-all duration-200">Khuyến mãi đặc biệt</a></li>
+                        <li><a href="#" class="footer-link block hover:pl-2 transition-all duration-200">Sản phẩm mới</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Hỗ trợ khách hàng</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" id="footer-tracking-link" class="footer-link block hover:pl-2 transition-all duration-200">Theo dõi đơn hàng</a></li>
+                        <li><a href="#" class="footer-link block hover:pl-2 transition-all duration-200">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#" class="footer-link block hover:pl-2 transition-all duration-200">Chính sách đổi trả</a></li>
+                        <li><a href="#" class="footer-link block hover:pl-2 transition-all duration-200">Chính sách giao hàng</a></li>
+                        <li><a href="#" class="footer-link block hover:pl-2 transition-all duration-200">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="footer-link block hover:pl-2 transition-all duration-200">Câu hỏi thường gặp</a></li>
+                    </ul>
+                    <div class="mt-4">
+                        <h4 class="text-white text-sm mb-2">Phương thức thanh toán</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/ed238b1ca0ad464cb08f5cd6fd2d0e9f~tplv-a9rns2rl98-image.image?rcl=2025101322325736500D5FF8BFFA0A9477&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1760970777&amp;x-signature=MJSS4g77%2BqE2ADWiK%2Fj3mLOo2Vg%3D" alt="Thanh toán Visa" class="payment-method h-8">
+                            <img src="https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/06011ea42bcd4d66b7f81f2d50f8bb1b~tplv-a9rns2rl98-image.image?rcl=20251013223325C312D2127E0963FFB762&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1760970805&amp;x-signature=9I3ljTvTqgD%2F%2F2NjLY84%2Ftlqsdc%3D" alt="Thanh toán Mastercard" class="payment-method h-8">
+                            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/c8270c37986b4a94807009f7929d011f~tplv-a9rns2rl98-image.image?rcl=20251013223359A1BBCDD7E1A6A48ADDE8&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1760970839&amp;x-signature=qhUyKPAdLaGnHpR5ZIamvJaWA7E%3D" alt="Thanh toán MoMo" class="payment-method h-8">
+                            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/bef689e6144b4c4580c3a42a9d5c410d~tplv-a9rns2rl98-image.image?rcl=2025101322362083D81CD863963A9A9C6D&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1760970980&amp;x-signature=vJ6tgtFShWc5mrV5Gs%2ByNLhpoZM%3D" alt="Thanh toán ZaloPay" class="payment-method h-8">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
+                <p>© 2025 THE BEST MART. All rights reserved. Được cấp phép bởi Bộ Công Thương.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- DATABASE ---
+        const products = [
+            // Food & Beverage
+            { id: 1, name: "Cải Bó Xôi Hữu Cơ VietGAP", price: 25000, img: "https://i.postimg.cc/9MnTGvKz/bo-xoi-huu-co-e2d3e5b65de54573afc90c0484bb4611-master.jpg", category: 'food', tags: { productType: 'fresh-vegetable', special: ['organic'], origin: 'vietnam', brand: 'VietGAP' }, promotion: false, rating: 4.8, reviews: 152, description: "Rau cải bó xôi tươi ngon, đạt chuẩn hữu cơ VietGAP, không thuốc trừ sâu, tốt cho sức khỏe. Giàu vitamin và khoáng chất." },
+            { id: 2, name: "Thịt Bò Mỹ Black Angus", price: 250000, img: "https://i.postimg.cc/3J4MCmyL/than-ngoai-bo-uc-black-angus-a-1.jpg", category: 'food', tags: { productType: 'fresh-meat', special: [], origin: 'usa', brand: 'Black Angus' }, promotion: true, rating: 5.0, reviews: 98, description: "Thịt thăn bò Black Angus nhập khẩu từ Mỹ, mềm ngọt, vân mỡ đều, thích hợp cho món bít tết hoặc nướng." },
+            { id: 3, name: "Gạo ST25 Ông Cua", price: 180000, img: "https://i.postimg.cc/wj59LLZg/unnamed.jpg", category: 'food', tags: { productType: 'dry-grain', special: [], origin: 'vietnam', brand: 'Ông Cua' }, promotion: false, rating: 4.9, reviews: 320, description: "Gạo ngon nhất thế giới ST25, hạt dài, cơm dẻo thơm. Sản phẩm chính hãng từ DNTN Hồ Quang Trí." },
+            { id: 4, name: "Bánh Gạo One One", price: 22000, img: "https://i.postimg.cc/7ZBwKwHt/8936096670075-6ab6b35b50c64b2eb33beff1d7f7bff8-1024x1024.jpg", category: 'food', tags: { productType: 'snack-cracker', special: ['gluten-free'], origin: 'vietnam', brand: 'One One' }, promotion: true, rating: 4.5, reviews: 210, description: "Bánh gạo giòn tan, thơm vị gạo mới, là món ăn vặt yêu thích của mọi gia đình." },
+            { id: 5, name: "Sữa Tươi Vinamilk Không Đường", price: 35000, img: "https://i.postimg.cc/VLWCLrgb/ST-Tiet-trung-FM-100-KD-180-3-715ac4447b-ea4475a245.png", category: 'food', tags: { productType: 'beverage-milk', special: ['no-sugar'], origin: 'vietnam', brand: 'Vinamilk' }, promotion: false, rating: 4.7, reviews: 540, description: "Lốc 4 hộp sữa tươi tiệt trùng Vinamilk 100% không đường, bổ sung canxi và dưỡng chất thiết yếu." },
+            { id: 6, name: "Cá Hồi Na-uy Đông Lạnh", price: 150000, img: "https://i.postimg.cc/MZrL3HVB/167395052448.png", category: 'food', tags: { productType: 'frozen-seafood', special: [], origin: 'import', brand: 'Generic' }, promotion: false, rating: 4.8, reviews: 112, description: "Phi lê cá hồi Na-uy đông lạnh, giàu Omega-3. Đóng gói hút chân không, đảm bảo vệ sinh." },
+            { id: 7, name: "Sữa Chua Hy Lạp", price: 55000, img: "https://i.postimg.cc/k5mMVf5V/3-6727fdd97b0845beae7bdc7dd89e9490.jpg", category: 'food', tags: { productType: 'dairy-yogurt', special: [], origin: 'import', brand: 'Generic' }, promotion: false, rating: 4.6, reviews: 88, description: "Sữa chua kiểu Hy Lạp sánh mịn, giàu protein, ít béo, tốt cho hệ tiêu hóa." },
+            { id: 19, name: "Sữa Hạt Óc Chó Hàn Quốc", price: 45000, img: "https://i.postimg.cc/vBDmMDB5/unnamed-1.jpg", category: 'food', tags: { productType: 'beverage-milk', special: ['lactose-free'], origin: 'korea', brand: 'Generic' }, promotion: false, rating: 4.7, reviews: 130, description: "Sữa hạt óc chó hạnh nhân nhập khẩu Hàn Quốc, vị ngọt thanh, béo ngậy, phù hợp cho người không dung nạp lactose." },
+
+            // Personal Care
+            { id: 8, name: "Sữa Rửa Mặt Cetaphil", price: 150000, img: "https://i.postimg.cc/zGS67rN7/sua-rua-mat-cetaphil-diu-nhe-khong-xa-phong-500ml-moi-2-1684727435-img-450x450-31d6f9-fit-center.jpg", category: 'personal-care', tags: { productType: 'face-cleanser', skinType: ['sensitive'], hairType: [], issue: [], ingredient: [], properties: ['no-fragrance'], brand: 'Cetaphil' }, promotion: false, rating: 4.9, reviews: 1245, description: "Sữa rửa mặt dịu nhẹ Cetaphil Gentle Skin Cleanser, không xà phòng, làm sạch hiệu quả mà không gây khô da. Dành cho mọi loại da, đặc biệt là da nhạy cảm." },
+            { id: 9, name: "KCN La Roche-Posay Anthelios", price: 450000, img: "https://i.postimg.cc/Bv26Mt62/product-variation-50-ml-front.webp", category: 'personal-care', tags: { productType: 'face-sunscreen', skinType: ['oily', 'acne-prone'], hairType: [], issue: ['acne'], ingredient: [], properties: [], brand: 'La Roche-Posay' }, promotion: true, rating: 4.8, reviews: 987, description: "Kem chống nắng kiểm soát dầu La Roche-Posay Anthelios Dry Touch, SPF 50+, bảo vệ da tối ưu khỏi tia UVA/UVB." },
+            { id: 10, name: "Dầu Gội H&S Trị Gàu", price: 120000, img: "https://i.postimg.cc/Bv3rxv1V/vn-11134207-7ras8-md8eldj5zzql78.webp", category: 'personal-care', tags: { productType: 'hair-shampoo', skinType: [], hairType: ['oily'], issue: ['dandruff'], ingredient: [], properties: [], brand: 'Head & Shoulders' }, promotion: false, rating: 4.7, reviews: 850, description: "Dầu gội Head & Shoulders Cool Menthol làm sạch gàu, ngăn gàu quay trở lại, mang lại cảm giác mát lạnh sảng khoái." },
+            { id: 11, name: "Serum Cấp Ẩm Hyaluronic Acid L'Oréal", price: 300000, img: "https://i.postimg.cc/pdk6zJvd/tinh-chat-l-oreal-hyaluronic-acid-cap-am-sang-da-11.jpg", category: 'personal-care', tags: { productType: 'face-serum', skinType: ['dry', 'combination'], hairType: [], issue: ['aging', 'wrinkles'], ingredient: ['hyaluronic-acid'], properties: [], brand: "L'Oréal" }, promotion: false, rating: 4.6, reviews: 633, description: "Tinh chất L'Oréal Paris Revitalift Hyaluronic Acid 1.5% giúp cấp ẩm tức thì, làm da căng mịn và rạng rỡ." },
+            { id: 12, name: "Son Môi MAC Ruby Woo", price: 550000, img: "https://i.postimg.cc/k51dqmB1/google-shopping-mua-1-tang-1-son-thoi-mac-min-li-chili-3g-tang-son-thoi-sieu-li-ruby-woo-3g-16866498.jpg", category: 'personal-care', tags: { productType: 'makeup-lipstick', skinType: [], hairType: [], issue: [], ingredient: [], properties: [], brand: 'MAC' }, promotion: true, rating: 4.9, reviews: 2100, description: "Son lì MAC màu Ruby Woo huyền thoại, sắc đỏ cổ điển, lên màu chuẩn, lâu trôi." },
+            { id: 13, name: "Dầu Xả TRESemmé Phục Hồi Hư Tổn", price: 180000, img: "https://i.postimg.cc/Ss2H4YB1/tresemme-salon-detox-dau-xa-1cee57a8aa5d4451b4e3eac28613e9f8.png", category: 'personal-care', tags: { productType: 'hair-conditioner', skinType: [], hairType: ['damaged'], issue: ['split-ends'], ingredient: [], properties: [], brand: 'TRESemmé' }, promotion: false, rating: 4.5, reviews: 450, description: "Dầu xả TRESemmé Keratin Smooth nuôi dưỡng và phục hồi tóc hư tổn, giúp tóc vào nếp suôn mượt." },
+            { id: 20, name: "Sữa tắm Romano cho nam", price: 130000, img: "https://i.postimg.cc/FF0nxvNj/8935212811002-4-1-jpg.webp", category: 'personal-care', tags: { productType: 'men-bodywash', skinType: [], hairType: [], issue: [], ingredient: [], properties: [], brand: 'Romano' }, promotion: false, rating: 4.7, reviews: 390, description: "Sữa tắm nước hoa Romano Attitude với hương thơm nam tính, quyến rũ, làm sạch sâu và mang lại cảm giác tự tin." },
+
+            // Home Care
+            { id: 14, name: "Nước Lau Sàn Lix Hương Chanh", price: 45000, img: "https://i.postimg.cc/28zTFB0P/8f9d1205-f04a-4fc6-8c8b-bc5c64e92650.png", category: 'home-care', tags: { productType: 'cleaning-floor', use: ['disinfect'], surface: ['tile'], scent: 'lemon', properties: [], format: 'liquid', brand: 'Lix' }, promotion: false, rating: 4.6, reviews: 321, description: "Nước lau sàn Lix diệt khuẩn, đuổi côn trùng hiệu quả. Hương chanh thơm mát, cho sàn nhà sạch bóng." },
+            { id: 15, name: "Nước Rửa Chén Seventh Generation", price: 95000, img: "https://i.postimg.cc/mDs7L0q0/4342-7260fb1122fc439ba74e13379b67569e-fe457e060fb4407eb3b2ecd00f975e5d-6f44cab89fba4f1aa2142632cfb9b.jpg", category: 'home-care', tags: { productType: 'cleaning-dish', use: ['stain-removal'], surface: [], scent: 'no-scent', properties: ['skin-safe', 'eco-friendly'], format: 'liquid', brand: 'Seventh Generation' }, promotion: false, rating: 4.8, reviews: 180, description: "Nước rửa chén hữu cơ Seventh Generation, thành phần từ thực vật, an toàn cho da tay và thân thiện với môi trường." },
+            { id: 16, name: "Nước Giặt OMO Matic Cửa Trước", price: 220000, img: "https://i.postimg.cc/pTC52yKY/vn-11134207-7r98o-lx0ojqmo0mop67.webp", category: 'home-care', tags: { productType: 'laundry-liquid', use: ['soften', 'stain-removal'], surface: [], scent: 'floral', properties: ['front-load'], format: 'liquid', brand: 'OMO' }, promotion: true, rating: 4.7, reviews: 1500, description: "Nước giặt OMO Matic chuyên dụng cho máy giặt cửa trước, xoáy bay vết bẩn cứng đầu, lưu hương bền lâu." },
+            { id: 17, name: "Sáp thơm Glade Oải hương", price: 75000, img: "https://i.postimg.cc/ncDV2CCt/sap-thom-glade-huong-hoa-oai-huong-180g-202302110903050606.jpg", category: 'home-care', tags: { productType: 'deodorizer-wax', use: ['deodorize'], surface: [], scent: 'floral', properties: [], format: 'wax', brand: 'Glade' }, promotion: false, rating: 4.5, reviews: 255, description: "Sáp thơm Glade hương oải hương thư giãn, giúp khử mùi và làm thơm không gian sống của bạn." },
+            { id: 18, name: "Túi Rác Tự Hủy Sinh Học An Lành", price: 30000, img: "https://i.postimg.cc/Gmj4PHSW/rac2.webp", category: 'home-care', tags: { productType: 'bags-trash', use: [], surface: [], scent: 'no-scent', properties: ['eco-friendly'], format: '', brand: 'An Lành' }, promotion: false, rating: 4.9, reviews: 480, description: "Cuộn 3 túi rác tự hủy sinh học, chất liệu dẻo dai, không mùi, góp phần bảo vệ môi trường." },
+            { id: 21, name: "Bột giặt Ariel", price: 190000, img: "https://i.postimg.cc/d01V8nCN/bot-giat-ariel-6.jpg", category: 'home-care', tags: { productType: 'laundry-powder', use: ['stain-removal'], surface: [], scent: 'floral', properties: ['top-load'], format: 'powder', brand: 'Ariel' }, promotion: false, rating: 4.6, reviews: 990, description: "Bột giặt Ariel sạch sâu, loại bỏ vết bẩn tốt hơn gấp 2 lần, dùng cho cả giặt tay và máy giặt cửa trên." },
+        ];
+        
+        const commonFiltersHTML = `
+            <div class="filter-section">
+                <h3 class="font-bold mb-2">Thương hiệu</h3>
+                <div class="space-y-1">
+                    </div>
+            </div>
+            <div class="filter-section">
+                <h3 class="font-bold mb-2">Khoảng giá</h3>
+                <div class="flex items-center gap-2">
+                    <input type="number" id="min-price" placeholder="Từ" class="w-full text-sm p-1 border rounded-md focus:outline-none focus:ring-1 focus:ring-sky-500">
+                    <span class="text-gray-400">-</span>
+                    <input type="number" id="max-price" placeholder="Đến" class="w-full text-sm p-1 border rounded-md focus:outline-none focus:ring-1 focus:ring-sky-500">
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3 class="font-bold mb-2">Ưu đãi</h3>
+                <div class="space-y-1">
+                    <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="promotion" value="true"> Đang khuyến mãi</label></div>
+                </div>
+            </div>
+        `;
+
+        const filtersConfig = {
+            'food': `
+                <div class="filter-section">
+                    <h3 class="font-bold mb-2">Thực phẩm tươi sống</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="fresh-vegetable"> Rau củ quả</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="fresh-meat"> Thịt gia súc</label></div>
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <h3 class="font-bold mb-2">Thực phẩm khô & Đóng hộp</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="dry-grain"> Gạo & Ngũ cốc</label></div>
+                    </div>
+                </div>
+                 <div class="filter-section">
+                    <h3 class="font-bold mb-2">Bánh kẹo & Đồ ăn vặt</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="snack-cracker"> Snack & bim bim</label></div>
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <h3 class="font-bold mb-2">Đồ uống</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="beverage-milk"> Sữa các loại</label></div>
+                    </div>
+                </div>
+                 <div class="filter-section">
+                    <h3 class="font-bold mb-2">Thực phẩm đông lạnh</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="frozen-seafood"> Hải sản đông lạnh</label></div>
+                    </div>
+                </div>
+                 <div class="filter-section">
+                    <h3 class="font-bold mb-2">Sản phẩm từ sữa</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="dairy-yogurt"> Sữa chua</label></div>
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <h3 class="font-bold mb-2">Nhu cầu đặc biệt</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="special" value="organic"> Hữu cơ</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="special" value="no-sugar"> Ít/Không đường</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="special" value="gluten-free"> Không Gluten</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="special" value="lactose-free"> Không Lactose</label></div>
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <h3 class="font-bold mb-2">Xuất xứ</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="origin" value="vietnam"> Việt Nam</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="origin" value="korea"> Hàn Quốc</label></div>
+                         <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="origin" value="usa"> Mỹ</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="origin" value="import"> Nhập khẩu khác</label></div>
+                    </div>
+                </div>
+            `,
+            'personal-care': `
+                 <div class="filter-section">
+                    <h3 class="font-bold mb-2">Chăm sóc da mặt</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="face-cleanser"> Sữa rửa mặt</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="face-serum"> Tinh chất (Serum)</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="face-sunscreen"> Kem chống nắng</label></div>
+                    </div>
+                </div>
+                 <div class="filter-section">
+                    <h3 class="font-bold mb-2">Chăm sóc tóc</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="hair-shampoo"> Dầu gội</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="hair-conditioner"> Dầu xả</label></div>
+                    </div>
+                </div>
+                 <div class="filter-section">
+                    <h3 class="font-bold mb-2">Sản phẩm cho nam</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="men-bodywash"> Sữa tắm cho nam</label></div>
+                    </div>
+                </div>
+                 <div class="filter-section">
+                    <h3 class="font-bold mb-2">Trang điểm</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="makeup-lipstick"> Son môi</label></div>
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <h3 class="font-bold mb-2">Loại da</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="skinType" value="oily"> Da dầu</label></div>
+                         <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="skinType" value="dry"> Da khô</label></div>
+                         <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="skinType" value="sensitive"> Da nhạy cảm</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="skinType" value="acne-prone"> Da mụn</label></div>
+                         <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="skinType" value="combination"> Da hỗn hợp</label></div>
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <h3 class="font-bold mb-2">Vấn đề cần cải thiện</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="issue" value="acne"> Da: Mụn</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="issue" value="aging"> Da: Lão hóa, nếp nhăn</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="issue" value="dandruff"> Tóc: Gàu</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="issue" value="split-ends"> Tóc: Chẻ ngọn</label></div>
+                    </div>
+                </div>
+                 <div class="filter-section">
+                    <h3 class="font-bold mb-2">Thành phần chính</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="ingredient" value="hyaluronic-acid"> Hyaluronic Acid</label></div>
+                    </div>
+                </div>
+            `,
+            'home-care': `
+                 <div class="filter-section">
+                    <h3 class="font-bold mb-2">Vệ sinh nhà cửa</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="cleaning-floor"> Nước lau sàn</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="cleaning-dish"> Nước rửa chén</label></div>
+                    </div>
+                </div>
+                 <div class="filter-section">
+                    <h3 class="font-bold mb-2">Giặt giũ</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="laundry-liquid"> Nước giặt</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="laundry-powder"> Bột giặt</label></div>
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <h3 class="font-bold mb-2">Khử mùi & Tạo hương</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="deodorizer-wax"> Sáp thơm</label></div>
+                    </div>
+                </div>
+                <div class="filter-section">
+                    <h3 class="font-bold mb-2">Túi & Màng bọc</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="productType" value="bags-trash"> Túi rác</label></div>
+                    </div>
+                </div>
+                 <div class="filter-section">
+                    <h3 class="font-bold mb-2">Công dụng</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="use" value="stain-removal"> Tẩy vết bẩn</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="use" value="deodorize"> Khử mùi</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="use" value="disinfect"> Diệt khuẩn</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="use" value="soften"> Làm mềm vải</label></div>
+                    </div>
+                </div>
+                 <div class="filter-section">
+                    <h3 class="font-bold mb-2">Đặc tính sản phẩm</h3>
+                    <div class="space-y-1">
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="properties" value="eco-friendly"> Thân thiện môi trường</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="properties" value="skin-safe"> An toàn cho da tay</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="properties" value="front-load"> Cho máy giặt cửa trước</label></div>
+                        <div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="properties" value="top-load"> Cho máy giặt cửa trên</label></div>
+                    </div>
+                </div>
+            `
+        };
+        
+        // --- DỮ LIỆU ĐÁNH GIÁ (CẬP NHẬT) ---
+        const sampleReviews = {
+            1: [
+                { name: "Anh Tuấn", rating: 5, text: "Rau rất tươi, giao hàng nhanh! Đóng gói cẩn thận. Sẽ ủng hộ shop dài dài.", shopResponse: "THE BEST MART cảm ơn anh Tuấn đã tin tưởng ạ! Rất vui vì anh hài lòng với sản phẩm." },
+                { name: "Chị Lan", rating: 4, text: "Sạch, nhưng bó hơi nhỏ so với giá tiền." }
+            ],
+            8: [{ name: "Ngọc", rating: 5, text: "Dùng cho da nhạy cảm rất tốt, không bị khô da. Hàng chuẩn, check code thoải mái." }],
+            16: [{ name: "Minh", rating: 4, text: "Giặt sạch, thơm lâu. Sẽ mua lại." }],
+            2: [
+                { name: "Quang Huy", rating: 5, text: "Thịt bò mềm, vân mỡ đẹp, làm bít tết tuyệt vời. Giao hàng nhanh, đá ướp vẫn còn lạnh.", shopResponse: "Dạ, shop cảm ơn anh Huy đã ủng hộ. Thịt bò Black Angus bên em luôn là hàng tuyển chọn đó ạ!" },
+                { name: "Hoàng Oanh", rating: 4, text: "Ngon, nhưng giá hơi cao." }
+            ],
+            3: [
+                { name: "Gia Hân", rating: 5, text: "Gạo dẻo, thơm, đúng chuẩn ST25. Cả nhà mình ai cũng khen.", shopResponse: "THE BEST MART cảm ơn chị Hân. Gạo Ông Cua là một trong những sản phẩm bán chạy nhất bên em đó ạ!" }
+            ],
+        };
+        
+        // --- DATABASE ĐƠN HÀNG (GIẢ LẬP) ---
+        let orderDatabase = {};
+
+
+        // --- STATE ---
+        let cart = [];
+        let currentCategory = 'all';
+        let activeFilters = {};
+
+        // --- SELECTORS ---
+        const productsGrid = document.getElementById('products-grid');
+        const cartButton = document.getElementById('cart-button');
+        const cartModal = document.getElementById('cart-modal');
+        const productDetailModal = document.getElementById('product-detail-modal');
+        const modalContent = document.getElementById('modal-content');
+        const cartCount = document.getElementById('cart-count');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalEl = document.getElementById('cart-total');
+        const checkoutButton = document.getElementById('checkout-button');
+        const checkoutModal = document.getElementById('checkout-modal');
+        const checkoutForm = document.getElementById('checkout-form');
+        const backToCartButton = document.getElementById('back-to-cart-button');
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const confirmationMessage = document.getElementById('confirmation-message');
+        const categoryNavLinks = document.querySelectorAll('.category-nav');
+        const filtersContainer = document.getElementById('filters-container');
+        const filterToggleButton = document.getElementById('filter-toggle');
+        const filtersSidebar = document.getElementById('filters-sidebar');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const searchInput = document.getElementById('search-input');
+        const resetFiltersBtn = document.getElementById('reset-filters-btn');
+        const header = document.querySelector('header');
+        const promoPopupModal = document.getElementById('promo-popup-modal');
+        const socialBubbleTrigger = document.getElementById('social-bubble-trigger');
+        const socialBubbles = document.querySelector('.social-bubbles');
+        
+        const heroSearchButton = document.querySelector('.hero-section button');
+        const trackingModal = document.getElementById('tracking-modal');
+        const trackingButton = document.getElementById('tracking-button');
+        const footerTrackingLink = document.getElementById('footer-tracking-link');
+        const trackingForm = document.getElementById('tracking-form');
+        const trackingResults = document.getElementById('tracking-results');
+
+
+        // --- FUNCTIONS ---
+        const formatCurrency = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+
+        const generateStars = (rating) => {
+            const totalStars = 5;
+            const percentage = (rating / totalStars) * 100;
+            const percentageRounded = `${Math.round(percentage / 10) * 10}%`;
+            return `
+                <div class="stars-outer">
+                    <i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
+                    <div class="stars-inner" style="width: ${percentageRounded};">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+            `;
+        };
+        
+        const openModal = (modalEl) => {
+            modalEl.classList.remove('hidden');
+            setTimeout(() => {
+                modalEl.querySelector('.modal-backdrop').classList.add('active');
+            }, 10);
+        }
+        
+        const openProductDetail = (productId) => {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            modalContent.innerHTML = `
+                <div class="w-full md:w-1/2 p-4">
+                    <img src="${product.img}" alt="${product.name}" class="w-full h-auto object-contain rounded-lg max-h-[80vh]">
+                </div>
+                <div class="w-full md:w-1/2 p-6 flex flex-col modal-scroll overflow-y-auto">
+                     <div class="flex-grow">
+                        <h2 class="text-3xl font-bold mb-2">${product.name}</h2>
+                        <div class="flex items-center mb-4">
+                           ${generateStars(product.rating)}
+                            <span class="ml-2 text-sm text-gray-600">(${product.reviews} đánh giá)</span>
+                        </div>
+                        <p class="text-3xl font-bold text-sky-600 mb-4">${formatCurrency(product.price)}</p>
+                        <p class="text-gray-700 leading-relaxed mb-6">${product.description}</p>
+                        
+                        <div class="border-t pt-4 mt-4">
+                            <div class="flex justify-between items-center mb-3">
+                                 <h3 class="text-xl font-bold">Đánh giá sản phẩm</h3>
+                                 <button id="show-review-form-btn" class="text-sm bg-sky-100 text-sky-700 font-medium py-1 px-3 rounded-lg hover:bg-sky-200 transition-colors">
+                                    <i class="fas fa-pencil-alt mr-1"></i>Viết đánh giá
+                                 </button>
+                            </div>
+                            
+                            <form id="review-form" class="hidden mb-4 p-4 border rounded-lg bg-gray-50 space-y-3">
+                                <h4 class="font-semibold">Bạn nghĩ gì về sản phẩm này?</h4>
+                                <div>
+                                    <label class="block mb-1 text-sm font-medium">Đánh giá của bạn:</label>
+                                    <div class="flex space-x-1 text-2xl text-gray-300">
+                                        <i class="far fa-star cursor-pointer hover:text-amber-400"></i>
+                                        <i class="far fa-star cursor-pointer hover:text-amber-400"></i>
+                                        <i class="far fa-star cursor-pointer hover:text-amber-400"></i>
+                                        <i class="far fa-star cursor-pointer hover:text-amber-400"></i>
+                                        <i class="far fa-star cursor-pointer hover:text-amber-400"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="review-name" class="block mb-1 text-sm font-medium">Tên của bạn:</label>
+                                    <input type="text" id="review-name" required class="w-full text-sm p-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-sky-500">
+                                </div>
+                                <div>
+                                    <label for="review-text" class="block mb-1 text-sm font-medium">Nhận xét:</label>
+                                    <textarea id="review-text" rows="3" required class="w-full text-sm p-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-sky-500"></textarea>
+                                </div>
+                                <button type="submit" class="bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300">Gửi đánh giá</button>
+                            </form>
+                            
+                            <div id="review-list" class="space-y-4 max-h-64 overflow-y-auto pr-2">
+                                </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t flex-shrink-0">
+                        <div class="flex justify-end items-center gap-3">
+                            <button class="add-to-cart-btn-modal bg-sky-100 text-sky-700 font-bold py-3 px-6 rounded-lg hover:bg-sky-200 transition" data-id="${product.id}">Thêm vào giỏ</button>
+                            <button class="buy-now-btn bg-sky-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-700 transition" data-id="${product.id}">Mua ngay</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="close-modal absolute top-3 right-4 text-gray-500 hover:text-gray-800 text-3xl" data-modal-id="product-detail-modal" aria-label="Đóng chi tiết sản phẩm">&times;</button>
+            `;
+            
+            loadReviews(productId);
+            attachReviewFormListeners(productId);
+            
+            productDetailModal.classList.remove('hidden');
+            setTimeout(() => {
+                productDetailModal.querySelector('.modal-backdrop').classList.add('active');
+                modalContent.classList.add('active');
+            }, 10);
+        }
+
+        const renderProducts = () => {
+            productsGrid.innerHTML = `
+                <div class="col-span-full text-center text-gray-500 py-10">
+                    <i class="fas fa-spinner fa-spin fa-3x text-sky-600"></i>
+                    <p class="mt-2">Đang tải sản phẩm...</p>
+                 </div>`;
+            
+            setTimeout(() => {
+                productsGrid.innerHTML = '';
+                
+                const searchTerm = searchInput.value.toLowerCase();
+                const minPrice = parseFloat(document.getElementById('min-price')?.value) || 0;
+                const maxPrice = parseFloat(document.getElementById('max-price')?.value) || Infinity;
+
+                const filteredProducts = products.filter(product => {
+                    if (currentCategory !== 'all' && product.category !== currentCategory) return false;
+                    if (searchTerm && !product.name.toLowerCase().includes(searchTerm)) return false;
+                    if (product.price < minPrice || product.price > maxPrice) return false;
+
+                    for (const key in activeFilters) {
+                        const filterValues = activeFilters[key];
+                        if (filterValues.length === 0) continue;
+                        
+                        if (key === 'promotion') {
+                            if (filterValues.includes('true') && !product.promotion) return false;
+                            continue;
+                        }
+
+                        const productValue = product.tags[key];
+                        if (Array.isArray(productValue)) { 
+                            if (!filterValues.some(v => productValue.includes(v))) return false;
+                        } else { 
+                            if (!filterValues.includes(productValue)) return false;
+                        }
+                    }
+                    return true;
+                });
+
+                if (filteredProducts.length === 0) {
+                     productsGrid.innerHTML = `<div class="col-span-full text-center text-gray-500 py-10">
+                        <i class="fas fa-box-open fa-3x mb-4"></i>
+                        <p class="text-xl">Không tìm thấy sản phẩm phù hợp.</p>
+                     </div>`;
+                     return;
+                }
+
+                filteredProducts.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card bg-white rounded-lg shadow-md overflow-hidden flex flex-col';
+                    card.setAttribute('data-id', product.id);
+                    card.innerHTML = `
+                        <div class="relative product-image-container" data-id="${product.id}">
+                             <img src="${product.img}" alt="${product.name}" class="w-full h-48 object-cover">
+                             ${product.promotion ? '<span class="sale-badge absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">SALE</span>' : ''}
+                        </div>
+                        <div class="p-4 flex flex-col flex-grow">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2 flex-grow product-name-container" data-id="${product.id}">${product.name}</h3>
+                            <div class="flex items-center mb-2">
+                               ${generateStars(product.rating)}
+                                <span class="ml-1 text-xs text-gray-600">(${product.reviews})</span>
+                            </div>
+                            <p class="text-xl font-bold text-sky-600 mb-4">${formatCurrency(product.price)}</p>
+                            <button class="add-to-cart-btn-grid mt-auto w-full bg-sky-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-600 transition duration-300 z-10" data-id="${product.id}">
+                                <i class="fas fa-cart-plus mr-2"></i>Thêm vào giỏ
+                            </button>
+                        </div>
+                    `;
+                    productsGrid.appendChild(card);
+                });
+            }, 300); 
+        };
+
+        const updateCartDisplay = () => {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center">Giỏ hàng của bạn đang trống.</p>';
+                checkoutButton.disabled = true;
+            } else {
+                 cart.forEach(item => {
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'flex items-center justify-between py-3 border-b last:border-b-0';
+                    itemEl.innerHTML = `
+                        <div class="flex items-center flex-1 min-w-0">
+                            <img src="${item.img}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md mr-4">
+                            <div class="min-w-0">
+                                <h4 class="font-semibold truncate">${item.name}</h4>
+                                <p class="text-gray-600">${formatCurrency(item.price)}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 sm:space-x-3 ml-2">
+                            <button class="quantity-change text-gray-500 hover:text-black w-6 h-6 rounded-full border flex-shrink-0" data-id="${item.id}" data-change="-1" aria-label="Giảm 1">-</button>
+                            <span class="w-8 text-center">${item.quantity}</span>
+                            <button class="quantity-change text-gray-500 hover:text-black w-6 h-6 rounded-full border flex-shrink-0" data-id="${item.id}" data-change="1" aria-label="Tăng 1">+</button>
+                             <button class="remove-from-cart text-red-500 hover:text-red-700 ml-1 sm:ml-2" data-id="${item.id}" aria-label="Xóa sản phẩm"><i class="fas fa-trash"></i></button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemEl);
+                    total += item.price * item.quantity;
+                });
+                checkoutButton.disabled = false;
+            }
+
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartTotalEl.textContent = formatCurrency(total);
+        };
+        
+        const addToCart = (productId) => {
+            const product = products.find(p => p.id === productId);
+            const cartItem = cart.find(item => item.id === productId);
+
+            if (cartItem) {
+                cartItem.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            cartCount.classList.add('add-to-cart-animation');
+            setTimeout(() => {
+                cartCount.classList.remove('add-to-cart-animation');
+            }, 500);
+            
+            updateCartDisplay();
+        };
+        
+        const changeQuantity = (productId, change) => {
+            const cartItem = cart.find(item => item.id === productId);
+            if (cartItem) {
+                cartItem.quantity += change;
+                if (cartItem.quantity <= 0) {
+                    cart = cart.filter(item => item.id !== productId);
+                }
+            }
+            updateCartDisplay();
+        };
+
+        const removeFromCart = (productId) => {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartDisplay();
+        }
+        
+        const renderFilters = () => {
+            let html = '';
+            if (currentCategory !== 'all') {
+                html = filtersConfig[currentCategory] || '';
+            }
+            
+            let brands = products
+                .filter(p => currentCategory === 'all' || p.category === currentCategory)
+                .map(p => p.tags.brand)
+                .filter((brand, index, self) => self.indexOf(brand) === index && brand !== 'Generic'); 
+            
+            const brandHTML = brands.map(brand => `<div><label class="flex items-center text-sm"><input type="checkbox" class="mr-2 filter-input" data-filter="brand" value="${brand}"> ${brand}</label></div>`).join('');
+            
+            const finalHTML = html + commonFiltersHTML;
+            filtersContainer.innerHTML = finalHTML.replace('', brandHTML);
+            attachFilterListeners();
+        }
+        
+        const handleFilterChange = () => {
+            activeFilters = {};
+            document.querySelectorAll('.filter-input:checked').forEach(input => {
+                const filterKey = input.dataset.filter;
+                if (!activeFilters[filterKey]) {
+                    activeFilters[filterKey] = [];
+                }
+                activeFilters[filterKey].push(input.value);
+            });
+            renderProducts();
+        }
+        
+        const resetAllFilters = () => {
+             activeFilters = {};
+            document.querySelectorAll('.filter-input').forEach(input => {
+                input.checked = false;
+            });
+             const minPriceEl = document.getElementById('min-price');
+            const maxPriceEl = document.getElementById('max-price');
+            if(minPriceEl) minPriceEl.value = '';
+            if(maxPriceEl) maxPriceEl.value = '';
+            searchInput.value = '';
+            renderProducts();
+        }
+        
+        const attachFilterListeners = () => {
+            document.querySelectorAll('.filter-input').forEach(input => {
+                input.addEventListener('change', handleFilterChange);
+            });
+            
+            const minPriceEl = document.getElementById('min-price');
+            const maxPriceEl = document.getElementById('max-price');
+            if(minPriceEl) minPriceEl.addEventListener('input', handleFilterChange);
+            if(maxPriceEl) maxPriceEl.addEventListener('input', handleFilterChange);
+        }
+        
+        // --- CÁC HÀM MỚI CHO TÍNH NĂNG ---
+        
+        // (CẬP NHẬT: Hiển thị sản phẩm đã mua)
+        const handleTrackOrder = (e) => {
+            e.preventDefault();
+            const orderId = document.getElementById('order-id').value.toUpperCase(); 
+            trackingResults.innerHTML = `<div class="text-center text-sky-600"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Đang tra cứu...</p></div>`;
+            
+            // Cập nhật dữ liệu test cho TBM12345 (nếu chưa có)
+            if (!orderDatabase["TBM12345"]) {
+                orderDatabase["TBM12345"] = {
+                    id: "TBM12345",
+                    name: "Khách hàng mẫu",
+                    status: 'shipping',
+                    date: "20/10/2025",
+                    items: [
+                        { name: "Cải Bó Xôi Hữu Cơ", price: 25000, quantity: 2, img: "https://i.postimg.cc/9MnTGvKz/bo-xoi-huu-co-e2d3e5b65de54573afc90c0484bb4611-master.jpg" },
+                        { name: "Sữa Tươi Vinamilk", price: 35000, quantity: 1, img: "https://i.postimg.cc/VLWCLrgb/ST-Tiet-trung-FM-100-KD-180-3-715ac4447b-ea4475a245.png" }
+                    ],
+                    updates: [
+                        { status: "Đang giao hàng", time: "09:00, 22/10/2025" },
+                        { status: "Đã đến kho trung tâm", time: "21:00, 21/10/2025" },
+                        { status: "Đang xử lý tại kho", time: "14:30, 20/10/2025" },
+                        { status: "Đã tiếp nhận đơn hàng", time: "14:00, 20/10/2025" }
+                    ]
+                };
+            }
+            
+            // Tự động cập nhật trạng thái đơn hàng mới (giả lập)
+            if (orderDatabase[orderId] && orderDatabase[orderId].status === 'pending') {
+                 orderDatabase[orderId].status = 'processing';
+                 orderDatabase[orderId].updates.unshift({ status: "Đang xử lý tại kho", time: new Date().toLocaleTimeString('vi-VN') }); 
+            }
+
+            setTimeout(() => {
+                const order = orderDatabase[orderId];
+                
+                if (order) {
+                    // Tạo HTML cho danh sách sản phẩm
+                    const productsHTML = order.items.map(item => `
+                        <div class="flex items-center justify-between py-2 border-b last:border-b-0">
+                            <div class="flex items-center min-w-0">
+                                <img src="${item.img}" alt="${item.name}" class="w-10 h-10 object-cover rounded-md mr-3 flex-shrink-0">
+                                <div class="min-w-0">
+                                    <p class="font-medium text-sm truncate">${item.name}</p>
+                                    <p class="text-xs text-gray-500">Số lượng: ${item.quantity}</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-semibold ml-2">${formatCurrency(item.price * item.quantity)}</span>
+                        </div>
+                    `).join('');
+
+                    // Tạo HTML cho lịch sử vận đơn
+                    const updatesHTML = order.updates.map((update, index) => `
+                        <li class="relative pl-6 pb-4">
+                            <div class="absolute left-0 top-1.5 w-3 h-3 bg-gray-300 rounded-full ${index === 0 ? 'bg-sky-600' : ''}"></div>
+                            ${index !== order.updates.length - 1 ? '<div class="absolute left-[5px] top-4 w-px h-full bg-gray-300"></div>' : ''}
+                            <p class="font-medium ${index === 0 ? 'text-sky-600' : ''}">${update.status}</p>
+                            <span class="text-xs text-gray-500">${update.time}</span>
+                        </li>
+                    `).join('');
+
+                    // Hiển thị kết quả
+                    trackingResults.innerHTML = `
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-bold text-lg">Đơn hàng #${order.id}</h4>
+                            <p class="text-gray-600 text-sm">Khách hàng: ${order.name}</p>
+                            <p class="text-gray-600 text-sm">Ngày đặt: ${order.date}</p>
+                            <p class="text-green-600 font-medium mt-2">Trạng thái: ${order.updates[0].status}</p>
+
+                            <h5 class="font-bold text-md mt-4 pt-4 border-t">Chi tiết đơn hàng</h5>
+                            <div class="max-h-40 overflow-y-auto modal-scroll pr-2">
+                                ${productsHTML}
+                            </div>
+
+                            <h5 class="font-bold text-md mt-4">Lịch sử vận chuyển</h5>
+                            <ul class="mt-4">${updatesHTML}</ul>
+                        </div>
+                    `;
+                } else {
+                     trackingResults.innerHTML = `
+                        <div class="border rounded-lg p-4 text-center">
+                            <i class="fas fa-exclamation-triangle text-red-500 fa-2x mb-2"></i>
+                            <p class="text-red-600 font-medium">Không tìm thấy đơn hàng "${orderId}". Vui lòng kiểm tra lại mã.</p>
+                        </div>
+                    `;
+                }
+            }, 1000); 
+        };
+
+        // (CẬP NHẬT: Hiển thị phản hồi của shop)
+        const renderReview = (review) => {
+            let shopResponseHTML = '';
+            if (review.shopResponse) {
+                shopResponseHTML = `
+                    <div class="mt-3 ml-4 p-3 bg-slate-100 rounded-lg border-l-4 border-sky-300">
+                        <p class="font-semibold text-sm text-sky-700">Phản hồi từ THE BEST MART:</p>
+                        <p class="text-gray-600 text-sm italic">"${review.shopResponse}"</p>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="border-b pb-3 last:border-b-0">
+                    <div class="flex items-center mb-1">
+                        <span class="font-semibold mr-2">${review.name}</span>
+                        <div class="text-sm">${generateStars(review.rating)}</div>
+                    </div>
+                    <p class="text-gray-700 text-sm">${review.text}</p>
+                    ${shopResponseHTML}
+                </div>
+            `;
+        };
+
+        const loadReviews = (productId) => {
+            const reviewListEl = document.getElementById('review-list');
+            const reviews = sampleReviews[productId] || [];
+            
+            if (reviews.length === 0) {
+                reviewListEl.innerHTML = '<p class="text-gray-500 text-sm text-center">Chưa có đánh giá nào cho sản phẩm này.</p>';
+                return;
+            }
+            
+            reviewListEl.innerHTML = reviews.map(renderReview).join('');
+        };
+
+        const attachReviewFormListeners = (productId) => {
+            const showFormBtn = document.getElementById('show-review-form-btn');
+            const reviewForm = document.getElementById('review-form');
+            
+            showFormBtn.addEventListener('click', () => {
+                reviewForm.classList.toggle('hidden');
+            });
+            
+            reviewForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newReview = {
+                    name: document.getElementById('review-name').value,
+                    rating: 4, // Tạm thời
+                    text: document.getElementById('review-text').value
+                };
+                
+                if (!sampleReviews[productId]) {
+                    sampleReviews[productId] = [];
+                }
+                sampleReviews[productId].unshift(newReview); 
+                
+                loadReviews(productId);
+                
+                reviewForm.classList.add('hidden');
+                reviewForm.reset();
+            });
+        };
+
+
+        // --- EVENT LISTENERS ---
+        
+        productsGrid.addEventListener('click', (e) => {
+            const addToCartBtn = e.target.closest('.add-to-cart-btn-grid');
+            if (addToCartBtn) {
+                const id = parseInt(addToCartBtn.dataset.id);
+                addToCart(id);
+                
+                addToCartBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Đã thêm!';
+                addToCartBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+                addToCartBtn.disabled = true;
+                setTimeout(() => {
+                    addToCartBtn.innerHTML = '<i class="fas fa-cart-plus mr-2"></i>Thêm vào giỏ';
+                    addToCartBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                    addToCartBtn.disabled = false;
+                }, 1500);
+
+                return; 
+            }
+            
+            const productCard = e.target.closest('.product-card');
+            if (productCard) {
+                const id = parseInt(productCard.dataset.id);
+                openProductDetail(id);
+            }
+        });
+
+        document.body.addEventListener('click', (e) => {
+            if (e.target.matches('.add-to-cart-btn-modal')) {
+                const id = parseInt(e.target.dataset.id);
+                addToCart(id);
+                
+                e.target.textContent = "Đã thêm!";
+                e.target.classList.add('bg-green-100', 'text-green-700');
+                setTimeout(() => {
+                    e.target.innerHTML = "Thêm vào giỏ";
+                    e.target.classList.remove('bg-green-100', 'text-green-700');
+                }, 1000);
+            }
+            if (e.target.matches('.buy-now-btn')) {
+                const id = parseInt(e.target.dataset.id);
+                addToCart(id); 
+                
+                productDetailModal.querySelector('.modal-backdrop').classList.remove('active');
+                modalContent.classList.remove('active');
+                setTimeout(() => {
+                    productDetailModal.classList.add('hidden');
+                    openModal(checkoutModal);
+                }, 300);
+            }
+        });
+
+
+        cartButton.addEventListener('click', () => openModal(cartModal));
+        
+        document.body.addEventListener('click', e => {
+            if (e.target.matches('.close-modal') || e.target.matches('.modal-backdrop')) {
+                if(e.target.closest('#promo-popup-modal')) return;
+
+                const modal = e.target.closest('.fixed.inset-0.z-50'); 
+                if (modal) {
+                    if(modal.id === 'tracking-modal') {
+                        trackingForm.reset();
+                        trackingResults.innerHTML = '';
+                    }
+                    
+                    modal.querySelector('.modal-backdrop').classList.remove('active');
+                    if (modal.querySelector('.modal-content')) {
+                        modal.querySelector('.modal-content').classList.remove('active');
+                    }
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                    }, 300);
+                }
+            }
+        });
+
+        checkoutButton.addEventListener('click', () => {
+            cartModal.querySelector('.modal-backdrop').classList.remove('active');
+            setTimeout(() => {
+                cartModal.classList.add('hidden');
+                openModal(checkoutModal);
+            }, 300);
+        });
+        
+        backToCartButton.addEventListener('click', () => {
+            checkoutModal.querySelector('.modal-backdrop').classList.remove('active');
+            setTimeout(() => {
+                checkoutModal.classList.add('hidden');
+                openModal(cartModal);
+            }, 300);
+        });
+        
+        // (CẬP NHẬT: Lưu giỏ hàng khi tạo đơn)
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+            const requiredFields = checkoutForm.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.add('form-input-error');
+                    field.classList.add('animate-shake');
+                    setTimeout(() => {
+                        field.classList.remove('animate-shake');
+                    }, 500);
+                } else {
+                    field.classList.remove('form-input-error');
+                }
+            });
+
+            if (isValid) {
+                const newOrderId = `TBM${Math.floor(10000 + Math.random() * 90000)}`;
+                const formData = new FormData(checkoutForm);
+                const customerName = formData.get('customer-name');
+                const paymentMethod = formData.get('payment');
+                
+                // --- LƯU SẢN PHẨM TRONG GIỎ HÀNG ---
+                const purchasedItems = cart.map(item => ({
+                    name: item.name,
+                    price: item.price,
+                    quantity: item.quantity,
+                    img: item.img
+                }));
+                
+                // Lưu đơn hàng vào database giả lập
+                orderDatabase[newOrderId] = {
+                    id: newOrderId,
+                    name: customerName,
+                    status: 'pending', // Trạng thái ban đầu
+                    date: new Date().toLocaleDateString('vi-VN'),
+                    items: purchasedItems, // Thêm sản phẩm vào
+                    updates: [
+                        { status: "Đã tiếp nhận đơn hàng", time: new Date().toLocaleTimeString('vi-VN') },
+                    ]
+                };
+                
+                confirmationMessage.innerHTML = `
+                    Cảm ơn <strong>${customerName}</strong> đã mua sắm! <br><br>
+                    Mã đơn hàng của bạn là: <br>
+                    <strong class="text-xl text-sky-700 my-2 block">${newOrderId}</strong>
+                    Bạn có thể dùng mã này để theo dõi vận đơn.
+                `;
+
+                checkoutModal.querySelector('.modal-backdrop').classList.remove('active');
+                setTimeout(() => {
+                    checkoutModal.classList.add('hidden');
+                    openModal(confirmationModal);
+                }, 300);
+                
+                cart = []; // Xóa giỏ hàng sau khi đã lưu
+                updateCartDisplay();
+                checkoutForm.reset();
+            }
+        });
+
+        cartItemsContainer.addEventListener('click', e => {
+            const changeBtn = e.target.closest('.quantity-change');
+            const removeBtn = e.target.closest('.remove-from-cart');
+            if(changeBtn) {
+                 const id = parseInt(changeBtn.dataset.id);
+                 const change = parseInt(changeBtn.dataset.change);
+                 changeQuantity(id, change);
+            }
+            if(removeBtn) {
+                const id = parseInt(removeBtn.dataset.id);
+                removeFromCart(id);
+            }
+        });
+
+        categoryNavLinks.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                currentCategory = e.target.dataset.category;
+
+                categoryNavLinks.forEach(l => l.classList.remove('text-sky-600', 'font-bold', 'active'));
+                document.querySelectorAll(`.category-nav[data-category="${currentCategory}"]`).forEach(l => {
+                    l.classList.add('text-sky-600', 'font-bold', 'active');
+                });
+                
+                resetAllFilters();
+                renderFilters();
+                
+                if (mobileMenu.classList.contains('hidden') === false) {
+                     mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        filterToggleButton.addEventListener('click', () => {
+            filtersSidebar.classList.toggle('hidden');
+            const chevron = filterToggleButton.querySelector('.fa-chevron-down');
+            chevron.classList.toggle('rotate-180');
+        });
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        searchInput.addEventListener('input', renderProducts);
+        
+        resetFiltersBtn.addEventListener('click', resetAllFilters);
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('header-shadow');
+            } else {
+                header.classList.remove('header-shadow');
+            }
+        });
+        
+        heroSearchButton.addEventListener('click', () => {
+            searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            searchInput.focus();
+        });
+
+        trackingButton.addEventListener('click', () => openModal(trackingModal));
+        footerTrackingLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(trackingModal);
+        });
+
+        trackingForm.addEventListener('submit', handleTrackOrder);
+        
+        
+        // --- PROMOTION POPUP LOGIC ---
+        const promoPopupContent = promoPopupModal.querySelector('.relative');
+        const closePromoButtons = promoPopupModal.querySelectorAll('.close-promo-popup, .modal-backdrop');
+
+        const showPromoPopup = () => {
+            promoPopupModal.classList.remove('hidden');
+            promoPopupModal.classList.add('flex'); 
+            setTimeout(() => {
+                promoPopupModal.querySelector('.modal-backdrop').classList.add('active');
+                promoPopupContent.classList.remove('scale-95', 'opacity-0');
+                promoPopupContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        };
+
+        const hidePromoPopup = () => {
+            promoPopupModal.querySelector('.modal-backdrop').classList.remove('active');
+            promoPopupContent.classList.add('scale-95', 'opacity-0');
+            promoPopupContent.classList.remove('scale-100', 'opacity-100');
+            setTimeout(() => {
+                promoPopupModal.classList.add('hidden');
+                promoPopupModal.classList.remove('flex');
+            }, 300); 
+            sessionStorage.setItem('promoPopupShown', 'true');
+        };
+
+        if (!sessionStorage.getItem('promoPopupShown')) {
+            setTimeout(showPromoPopup, 2000); 
+        }
+
+        closePromoButtons.forEach(btn => {
+            btn.addEventListener('click', hidePromoPopup);
+        });
+        
+        // --- Social Media Bubble Logic ---
+        socialBubbleTrigger.addEventListener('click', () => {
+            socialBubbles.classList.toggle('active');
+            const icon = socialBubbleTrigger.querySelector('i');
+            if (socialBubbles.classList.contains('active')) {
+                icon.classList.remove('fa-comment');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-comment');
+            }
+        });
+
+
+        // --- INITIALIZATION ---
+        renderFilters();
+        renderProducts();
+        updateCartDisplay();
+    });
+    </script>
+</body></html>
